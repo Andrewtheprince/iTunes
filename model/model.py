@@ -19,3 +19,15 @@ class Model:
 
     def getGraphDetails(self):
         return self._graph.number_of_nodes(), self._graph.number_of_edges()
+
+    def getNodi(self):
+        return self._graph.nodes()
+
+    def getComponenteConnessa(self, nodo):
+        vicini = nx.neighbors(self._graph, nodo)
+        dimensione = 1
+        durata = nodo.dTot
+        for vicino in vicini:
+            dimensione += 1
+            durata += vicino.dTot
+        return dimensione, durata

@@ -25,9 +25,9 @@ class DAO:
         conn = DBConnect.get_connection()
         cursor = conn.cursor(dictionary=True)
         result = []
-        query = """ SELECT DISTINCTROW t1.AlbumId s a1, t2.AlbumId as a2
+        query = """ SELECT DISTINCTROW t1.AlbumId as a1, t2.AlbumId as a2
                     FROM track t1, track t2, playlisttrack p1, playlisttrack p2
-                    WHERE t2.TrackId = p2.TrckId and t1.TrackId = p1.TrackId and p2.PlaylistId = p1.PlaylistId
+                    WHERE t2.TrackId = p2.TrackId and t1.TrackId = p1.TrackId and p2.PlaylistId = p1.PlaylistId
                     and t1.AlbumId < t2.AlbumId"""
         cursor.execute(query)
         for row in cursor:
