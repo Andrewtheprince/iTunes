@@ -6,11 +6,16 @@ class Model:
     def __init__(self):
         self._graph = nx.Graph()
         self._allNodi = None
+        self._idMapAlbum = {}
 
     def buildGraph(self, dMin):
         self._graph = nx.Graph()
         self._allNodi = DAO.getAlbums(dMin)
         self._graph.add_nodes_from(self._allNodi)
+        for nodo in self._allNodi:
+            self._idMapAlbum[nodo.AlbumId] = nodo
+        archi = DAO.getAllEdges(self._idMapAlbum)
+        self._graph.add_edges_from(archi)
 
     def getGraphDetails(self):
         return self._graph.number_of_nodes(), self._graph.number_of_edges()
